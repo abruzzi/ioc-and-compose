@@ -5,11 +5,19 @@ import {
   CSSTransition,
 } from 'react-transition-group';
 
+import close from './close.svg'
+
 const tokenContainerStyles = css({
+  textTransform: 'uppercase',
   border: '1px solid #eee',
   cursor: 'default',
-  padding: '4px',
+  margin: '0 2px',
   backgroundColor: '#fefefe',
+  lineHeight: 1,
+  display: 'inline-flex',
+  alignContent: 'center',
+  justifyContent: 'center',
+  transition: `opacity 100ms, transform 100ms`
 });
 
 const roundedStyles = css({
@@ -17,15 +25,21 @@ const roundedStyles = css({
 });
 
 const removeButtonStyles = css({
-  display: 'inline-block',
+  display: 'inline-grid',
   appearance: 'none',
   border: 'none',
-  opacity: 1
+  opacity: 1,
+  lineHeight: 1,
+  height: '1rem',
+  width: '1rem',
+  padding: '.2rem',
+  margin: 0,
 });
 
-const exitStyles = css({
-  opacity: 0
-});
+const exitingStyles = css({
+  opacity: 0,
+  transform: 'translateX(-50%)',
+})
 
 type TokenProps = {
   text: string;
@@ -43,16 +57,20 @@ export default (props: TokenProps) => {
   const [isRemoved, setRemoved] = useState(false);
 
   return (
-    <CSSTransition timeout={500} in={!isRemoved} unmountOnExit>
+    <CSSTransition timeout={100} in={!isRemoved} unmountOnExit>
       {
         (state: string) => (
           <span css={[
-            tokenContainerStyles, 
+            tokenContainerStyles,
             appearance === 'rounded' ? roundedStyles : null,
-            state === 'exited' ? exitStyles : null,
-            ]}>
-            {text}
-            {isRemovable && <button css={removeButtonStyles} onClick={() => setRemoved(true)}>x</button>}
+            state === 'exiting' ? exitingStyles : null,
+          ]}>
+            <span>{text}</span>
+            {isRemovable &&
+              <button css={removeButtonStyles} onClick={() => setRemoved(true)}>
+                <img src={close} alt="close" />
+              </button>
+            }
           </span>
         )
       }
