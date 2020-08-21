@@ -15,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <div style={{width: '800px', margin: '20px auto'}}>
       {
-        tokens.map(t => (<Token key={t} text={t} isRemovable />))
+        tokens.map(t => (<Token key={t} text={t} isRemovable appearance="rounded" />))
       }
     </div>
   </React.StrictMode>,

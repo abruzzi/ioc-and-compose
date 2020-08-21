@@ -20,6 +20,11 @@ const tokenContainerStyles = css({
   transition: `opacity 100ms, transform 100ms`
 });
 
+const contentStyles = css({
+  padding: '0 2px',
+  color: '#5f6368'
+});
+
 const roundedStyles = css({
   borderRadius: '4px'
 });
@@ -34,6 +39,11 @@ const removeButtonStyles = css({
   width: '1rem',
   padding: '.2rem',
   margin: 0,
+  transition: 'opacity 100ms',
+
+  '&:hover': {
+    opacity: 0.8
+  }
 });
 
 const exitingStyles = css({
@@ -65,7 +75,7 @@ export default (props: TokenProps) => {
             appearance === 'rounded' ? roundedStyles : null,
             state === 'exiting' ? exitingStyles : null,
           ]}>
-            <span>{text}</span>
+            <span css={contentStyles}>{text}</span>
             {isRemovable &&
               <button css={removeButtonStyles} onClick={() => setRemoved(true)}>
                 <img src={close} alt="close" />
