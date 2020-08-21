@@ -5,9 +5,17 @@ import './index.css';
 
 import Token from './Token';
 
+const tokens = [
+  "personal",
+  "work",
+  "travel"
+];
+
 ReactDOM.render(
   <React.StrictMode>
-    <Token text="I am a token" />
+    {
+      tokens.map(t => (<Token key={t} text={t} isRemovable />))
+    }
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -9,9 +9,9 @@ describe('Token', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('render a round corner token', () => {
-    const {getByText} = render(<Token text="personal" appearance="rounded" />);
+  it('render a remove button', () => {
+    const {getByText} = render(<Token text="personal" isRemovable />);
     const element = getByText('personal');
-    expect(element).toBeInTheDocument();
-  })
+    expect(element.querySelector('button')).toBeInTheDocument();
+  });
 })
